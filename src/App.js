@@ -8,6 +8,7 @@ function App() {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [values, setValues] = useState({user: "", pass: ""})
+  const [display, setDisplay] = useState({display1: "block", display2: "none"})
 
   function usernameHandleChange(value) {
     setUsername(currentUsername => value)
@@ -26,6 +27,10 @@ function App() {
     //do i want to do this?
     setUsername(currentUsername => "")
     setPassword(currentPassword => "")
+    setDisplay(() => ({
+      display1: "none",
+      display2: "block"
+    }))
   }
 
   function register(event) {
@@ -35,17 +40,20 @@ function App() {
 
   return(
     <div>
-      <Header />
-      <Form 
-        username={username} 
-        password={password} 
-        usernameHandleChange={usernameHandleChange}
-        passwordHandleChange ={passwordHandleChange}
-        logIn={logIn}
-        register={register}
-      />
-      <h1>{values.user}</h1>
-      <h1>{values.pass}</h1>
+      <div style={{display: display.display1}}>
+        <Header />
+        <Form 
+          username={username} 
+          password={password} 
+          usernameHandleChange={usernameHandleChange}
+          passwordHandleChange ={passwordHandleChange}
+          logIn={logIn}
+          register={register}
+        />
+      </div>
+      <div style={{display: display.display2}}>
+        <h1 style={{textAlign: "center"}}>Loading...</h1>
+      </div>
     </div>
   )
 }
